@@ -1,0 +1,19 @@
+name: zion
+version: git
+summary: A consensus-compatible Zcash node client written in Rust.
+description: |
+  Zcash client written in Rust.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+apps:
+  zion:
+    command: zion
+    plugs: [home, network, network-bind]
+
+parts:
+  zion:
+    source: .
+    plugin: rust
+    build-packages: [g++]

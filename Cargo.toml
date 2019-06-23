@@ -1,0 +1,70 @@
+[package]
+name = "zion"
+version = "0.1.0"
+license = "GPL-3.0"
+authors = ["Zcash Foundation"]
+description = "A consensus-compatible Zcash node client written in Rust."
+
+[dependencies]
+app_dirs = { git = "https://octonion.institute/susytech/app-dirs-rs" }
+chain = { path = "chain" }
+clap = { version = "2", features = ["yaml"] }
+db = { path = "db" }
+env_logger = {version="0.5",registry="susytech"}
+import = { path = "import" }
+keys = { path = "keys" }
+libc = {version="0.2",registry="susytech"}
+log = {version="0.4",registry="susytech"}
+logs = { path = "logs" }
+message = { path = "message" }
+network = { path = "network" }
+miner = { path = "miner" }
+p2p = { path = "p2p" }
+primitives = { path = "primitives" }
+rpc = { path = "rpc" }
+script = { path = "script" }
+storage = { path = "storage" }
+sync = { path = "sync" }
+verification = { path = "verification" }
+
+[profile.dev]
+debug = true
+panic = 'abort'
+
+[profile.release]
+debug = true
+panic = 'abort'
+
+[profile.test]
+debug = true
+
+[[bin]]
+path = "zion/main.rs"
+name = "zion"
+
+[workspace]
+members = [
+	"bencher",
+	"./crypto",
+	"chain",
+	"db",
+	"import",
+	"keys",
+	"logs",
+	"message",
+	"miner",
+	"network",
+	"p2p",
+	"primitives",
+	"rpc",
+	"script",
+	"serialization",
+	"serialization_derive",
+	"storage",
+	"sync",
+	"test-data",
+	"verification",
+]
+
+[patch.crates-io]
+heapsize = { git = "https://octonion.institute/susy-rust/heapsize.git" }
